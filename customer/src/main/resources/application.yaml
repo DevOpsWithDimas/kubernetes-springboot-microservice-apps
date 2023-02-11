@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DATABASE_USERNAME:customer4p1}
+    password: ${DATABASE_PASSWORD:customer4p1}
+    url: jdbc:mysql://${DATABASE_HOST:localhost}:${DATABASE_PORT:3306}/${DATABASE_NAME:customer4p1}
+  data:
+    jpa:
+      repositories:
+        enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    generate-ddl: off
+    database: mysql
+  flyway:
+    baseline-on-migrate: true
+    clean-disabled: true
+    enabled: ${FLYWAY_ENABLED:true}
+  main:
+    lazy-initialization: true
+server:
+  port: 9090
+

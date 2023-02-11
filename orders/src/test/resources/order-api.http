@@ -1,0 +1,11 @@
+### GET request with a header
+POST http://{{host}}:{{port}}{{context-path}}/api/order/v1/checkout
+Accept: application/json
+Content-Type: application/json
+Timeout: 3s
+
+{
+  "userId": "cust01",
+  "item": "Macbook Pro 13\" (A1723)",
+  "qty": "2"
+}

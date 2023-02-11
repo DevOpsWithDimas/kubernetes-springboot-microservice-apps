@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: ${DATABASE_USERNAME:order4p1}
+    password: ${DATABASE_PASSWORD:order4p1}
+    url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5432}/${DATABASE_NAME:order4p1}
+  data:
+    jpa:
+      repositories:
+        enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    generate-ddl: off
+    database: postgresql
+  flyway:
+    baseline-on-migrate: true
+    clean-disabled: true
+    enabled: ${FLYWAY_ENABLED:true}
+  main:
+    lazy-initialization: true
+server:
+  port: 9091
+services:
+  customer:
+    host: ${SERVICE_CUSTOMER_HOST:localhost}
+    port: ${SERVICE_CUSTOMER_PORT:9090}
+    context-path: ${SERVICE_CUSTOMER_CONTEXT_PATH:}
+    proto: ${SERVICE_CUSTOMER_PROTO:http}

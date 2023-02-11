@@ -1,0 +1,3 @@
+### GET request with a header
+GET http://{{host}}:{{port}}{{context-path}}/api/customer/v1/findById/cust01
+Accept: application/json

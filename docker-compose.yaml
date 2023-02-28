@@ -1,0 +1,26 @@
+version: '3.9'
+volumes:
+  pg_data: { }
+  mysql_data: { }
+services:
+  postgres:
+    image: 192.168.88.50:8086/postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=order4p1
+      - POSTGRES_USER=order4p1
+      - POSTGRES_DB=order4p1
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+  mysql:
+    image: 192.168.88.50:8086/mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootPasswordnyaApa
+      - MYSQL_DATABASE=customer4p1
+      - MYSQL_USER=customer4p1
+      - MYSQL_PASSWORD=customer4p1
+    volumes:
+      - mysql_data:/var/lib/mysql

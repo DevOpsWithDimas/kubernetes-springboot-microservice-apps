@@ -3,24 +3,65 @@ volumes:
   pg_data: { }
   mysql_data: { }
 services:
-  postgres:
-    image: 192.168.88.50:8086/postgres:15
+  customerAPI:
+    image: 192.168.88.50:8087/udemy/ecommerce-customer:v1
+    build:
+      dockerfile: Dockerfile
+      context: ./customer
+      args:
+        JAR_FILE: customer-api.jar
     ports:
-      - "5432:5432"
+      - "9090:9090"
     environment:
-      - POSTGRES_PASSWORD=order4p1
-      - POSTGRES_USER=order4p1
-      - POSTGRES_DB=order4p1
-    volumes:
-      - pg_data:/var/lib/postgresql/data
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      - DATABASE_USERNAME=${MYSQL_USER}
+      - DATABASE_PASSWORD=${MYSQL_PASSWORD}
+      - DATABASE_HOST=mysql
+      - DATABASE_PORT=3306
+      - DATABASE_NAME=${MYSQL_DATABASE}
+    depends_on:
+      - mysql
   mysql:
     image: 192.168.88.50:8086/mysql:8.0
     ports:
       - "3306:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=rootPasswordnyaApa
-      - MYSQL_DATABASE=customer4p1
-      - MYSQL_USER=customer4p1
-      - MYSQL_PASSWORD=customer4p1
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
     volumes:
       - mysql_data:/var/lib/mysql
+  orderAPI:
+    image: 192.168.88.50:8087/udemy/ecommerce-order:v1
+    build:
+      dockerfile: Dockerfile
+      context: ./orders
+      args:
+        JAR_FILE: orders-api.jar
+    ports:
+      - "9091:9091"
+    environment:
+      - POSTGRES_PASSWORD
+      - POSTGRES_USER
+      - POSTGRES_DB
+      - DATABASE_USERNAME=${POSTGRES_USER}
+      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=${POSTGRES_DB}
+      - SERVICE_CUSTOMER_HOST=customerAPI
+    depends_on:
+      - mysql
+  postgres:
+    image: 192.168.88.50:8086/postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD
+      - POSTGRES_USER
+      - POSTGRES_DB
+    volumes:
+      - pg_data:/var/lib/postgresql/data

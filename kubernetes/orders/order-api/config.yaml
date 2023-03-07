@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: order-api
+  namespace: orders-module
+data:
+  SERVICE_CUSTOMER_HOST: "customer-api.customer-module"
+  SERVICE_CUSTOMER_PORT: "9090"
+  SERVICE_CUSTOMER_PROTO: "http"

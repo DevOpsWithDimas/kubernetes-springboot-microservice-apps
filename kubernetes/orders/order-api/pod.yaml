@@ -15,6 +15,9 @@ spec:
       ports:
         - containerPort: 9091
           name: http
+      envFrom:
+        - configMapRef:
+            name: order-api
       env:
         - name: DATABASE_USERNAME
           valueFrom:

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: customer-module
+spec:
+  selector:
+    app: mysql
+    tier: database
+    env: testing
+  ports:
+    - port: 3306
+      name: tcp
+      protocol: TCP
+  type: ClusterIP

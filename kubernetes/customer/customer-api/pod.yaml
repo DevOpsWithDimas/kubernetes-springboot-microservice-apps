@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: customer-api
+  namespace: customer-module
+  labels:
+    app: customer-api
+    tier: backend
+    env: testing
+spec:
+  containers:
+    - name: customer-api
+      image: 192.168.88.50:8086/udemy/ecommerce-customer:v1
+      imagePullPolicy: IfNotPresent
+      ports:
+        - containerPort: 9090
+          name: http
+      env:
+        - name: DATABASE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: MYSQL_USER
+              name: mysql
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: MYSQL_PASSWORD
+              name: mysql
+        - name: DATABASE_HOST
+          value: mysql
+        - name: DATABASE_PORT
+          value: "3306"
+        - name: DATABASE_NAME
+          valueFrom:
+            configMapKeyRef:
+              key: MYSQL_DATABASE
+              name: mysql
+  restartPolicy: Always

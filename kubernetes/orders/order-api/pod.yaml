@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: order-api
+  namespace: orders-module
+  labels:
+    app: order-api
+    tier: backend
+    env: testing
+spec:
+  containers:
+    - name: order-api
+      image: 192.168.88.50:8086/udemy/ecommerce-order:v1
+      imagePullPolicy: IfNotPresent
+      ports:
+        - containerPort: 9091
+          name: http
+      env:
+        - name: DATABASE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: POSTGRES_USER
+              name: postgres
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: POSTGRES_PASSWORD
+              name: postgres
+        - name: DATABASE_HOST
+          value: postgres
+        - name: DATABASE_PORT
+          value: "5432"
+        - name: DATABASE_NAME
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_DB
+              name: postgres
+  restartPolicy: Always

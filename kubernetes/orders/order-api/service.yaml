@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-api
+  namespace: orders-module
+spec:
+  selector:
+    app: order-api
+    tier: backend
+    env: testing
+  ports:
+    - port: 9091
+      name: http
+      protocol: TCP
+  type: NodePort

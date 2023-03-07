@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer-api
+  namespace: customer-module
+spec:
+  selector:
+    app: customer-api
+    tier: backend
+    env: testing
+  ports:
+    - port: 9090
+      name: http
+      protocol: TCP
+  type: NodePort

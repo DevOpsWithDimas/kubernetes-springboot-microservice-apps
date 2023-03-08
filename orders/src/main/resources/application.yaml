@@ -28,3 +28,24 @@ services:
     port: ${SERVICE_CUSTOMER_PORT:9090}
     context-path: ${SERVICE_CUSTOMER_CONTEXT_PATH:}
     proto: ${SERVICE_CUSTOMER_PROTO:http}
+management:
+  endpoint:
+    health:
+      enabled: true
+      probes:
+        enabled: true
+      group:
+        readiness:
+          include:
+            - db
+            - customerAPI
+        liveness:
+          include:
+            - db
+            - customerAPI
+      show-components: always
+logging:
+  level:
+    org.springframework: fatal
+    org.flywaydb.core.internal.license: fatal
+    org.hibernate: fatal

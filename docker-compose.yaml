@@ -35,7 +35,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
   orderAPI:
-    image: 192.168.88.50:8087/udemy/ecommerce-order:v1
+    image: 192.168.88.50:8087/udemy/ecommerce-order:v2
     build:
       dockerfile: Dockerfile
       context: ./orders

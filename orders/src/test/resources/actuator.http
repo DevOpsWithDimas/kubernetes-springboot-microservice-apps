@@ -1,0 +1,11 @@
+### health component
+GET http://{{host}}:{{port}}{{context-path}}/actuator/health
+Accept: application/json
+
+### health check liveness
+GET http://{{host}}:{{port}}{{context-path}}/actuator/health/liveness
+Accept: application/json
+
+### health check readiness
+GET http://{{host}}:{{port}}{{context-path}}/actuator/health/readiness
+Accept: application/json

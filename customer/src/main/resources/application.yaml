@@ -22,4 +22,20 @@ spring:
     lazy-initialization: true
 server:
   port: 9090
+management:
+  endpoint:
+    health:
+      enabled: true
+      probes:
+        enabled: true
+      group:
+        liveness:
+          include:
+            - db
+      show-components: always
+logging:
+  level:
+    org.springframework: fatal
+    org.flywaydb.core.internal.license: fatal
+    org.hibernate: fatal
 

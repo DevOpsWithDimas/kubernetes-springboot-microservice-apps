@@ -4,7 +4,7 @@ volumes:
   mysql_data: { }
 services:
   customerAPI:
-    image: 192.168.88.50:8087/udemy/ecommerce-customer:v1
+    image: 192.168.88.50:8087/udemy/ecommerce-customer:v2
     build:
       dockerfile: Dockerfile
       context: ./customer

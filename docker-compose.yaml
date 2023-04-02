@@ -4,7 +4,7 @@ volumes:
   mysql_data: { }
 services:
   customerAPI:
-    image: 192.168.88.50:8087/udemy/ecommerce-customer:v2
+    image: 192.168.88.5:8087/udemy/ecommerce-customer:v2
     build:
       dockerfile: Dockerfile
       context: ./customer
@@ -24,7 +24,7 @@ services:
     depends_on:
       - mysql
   mysql:
-    image: 192.168.88.50:8086/mysql:8.0
+    image: 192.168.88.5:8086/mysql:8.0
     ports:
       - "3306:3306"
     environment:
@@ -35,7 +35,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
   orderAPI:
-    image: 192.168.88.50:8087/udemy/ecommerce-order:v2
+    image: 192.168.88.5:8087/udemy/ecommerce-order:v2
     build:
       dockerfile: Dockerfile
       context: ./orders
@@ -56,7 +56,7 @@ services:
     depends_on:
       - mysql
   postgres:
-    image: 192.168.88.50:8086/postgres:15
+    image: 192.168.88.5:8086/postgres:15
     ports:
       - "5432:5432"
     environment:

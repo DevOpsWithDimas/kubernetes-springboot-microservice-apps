@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
     - name: postgres
-      image: 192.168.88.50:8086/postgres:15
+      image: 192.168.88.5:8086/postgres:15
       imagePullPolicy: IfNotPresent
       ports:
         - containerPort: 5432

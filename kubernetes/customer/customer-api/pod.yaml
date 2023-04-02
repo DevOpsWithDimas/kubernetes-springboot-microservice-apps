@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
     - name: customer-api
-      image: 192.168.88.50:8086/udemy/ecommerce-customer:v2
+      image: 192.168.88.5:8086/udemy/ecommerce-customer:v2
       imagePullPolicy: IfNotPresent
       ports:
         - containerPort: 9090
